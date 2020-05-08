@@ -82,3 +82,13 @@ En fonction du nombre de simulation voulue ou bien dans notre cas d'une contrain
 
 Ce fils est censé représenter le meilleur coup possible, en effet le MCTS se base sur des statistiques.
 Donc, plus il y aura de simulations plus l'algorithmes représentera une réalité dépassant la notion de 'random'.
+
+# Bibliothèque utiliser
+- copy
+- random
+- math
+- sys
+- cherrypy
+- json
+- socket
+- webbroser
