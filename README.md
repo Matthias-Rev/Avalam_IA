@@ -29,7 +29,15 @@ C'est à dire "Alpha(Go)Zero"
 ## Mont Carlo Tree Search
 AlphaZero utilise comme algo principale le Mont Carlo Tree Search (MCTS) et en complément un reseau de neuronnes.
 Dans le cadre du projet nous nous sommes arreté au MCTS qui est déja puissant pour la tâche demandée.
-#### Mais comment fonctionne-t-il ?
+### Mais comment fonctionne-t-il ?
+![MCTS](https://user-images.githubusercontent.com/60757246/81428082-07142180-915c-11ea-8349-7aaea1bd9a57.png)
 
+Comme le décrit le graphe au-dessus il possède plusieurs étapes importantes.
+C'est un algorithme qui fonctionne sur base d'un Arbre de possibilité, les noeuds de cette arbre stock les informations comme le coup lié à ce noeud mais aussi le nombre d'exploration et de victoire lié (j'explique en bas ce que ça signifie).
+
+#### La Selection
+
+Le programme descend de la racine à ses fils, et de ses fils à ses "petit-fils", dans un sens bien précis.
+En effet, le prochain fils à être visité est choisie parmis les autres suivants une équation, le noeud possédant la valeur la plus élevé est sélectionné.
 
 
