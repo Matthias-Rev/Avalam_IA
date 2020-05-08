@@ -92,3 +92,22 @@ Donc, plus il y aura de simulations plus l'algorithmes représentera une réalit
 - json
 - socket
 - webbroser
+
+#### lien intéressant pour la compréhension
+
+- https://www.youtube.com/watch?v=UXW2yZndl7U
+- https://www.youtube.com/watch?v=Fbs4lnGLS8M&t=638s
+- https://web.stanford.edu/~surag/posts/alphazero.html
+
+#### Si tu veux continuer sur mes pas jeune padawan :godmode:
+
+Le plus intéressant serait de lui rajouter un soutien avec un reseau de neurone ,pour l'algorithme en tant que telle une optimisation serait bienvenue.
+
+Et bien sur même si l'algorithme est puissant, il a une nette faiblesse en début de partie dû aux nombres conséquents de coups possibles.
+Donc lui obliger en début de partie à répondre sur base d'une tactique choisie à l'avance serait bien vu:
+
+- Cacher les pions adverses avec ses propres pions
+- Neutraliser les tours possédants plus de 4 pions
+- Essayer de jouer les pions au milieu du board, pour raccourcir rapidement le nombre de possibilité de jeu et ainsi recourir plus vite au MCTS
+
+Le moment le plus efficace pour switcher sur du MCTS serait un nombre de 40 possibilités.
