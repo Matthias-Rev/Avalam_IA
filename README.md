@@ -53,3 +53,7 @@ On descend ainsi jusqu'à un noeud qui n'a aucun fils
 
 Si un noeud ne posséde aucun fils, on va alors 'l'expand' donc lui rajouter autant de fils qu'il y a de possibilité de jeu.
 Par exemple,
+
+blabla
+
+Dans ce cas-ci, les croix ont encore 5 possibilités de jeux donc ce noeud aura 5 fils.
