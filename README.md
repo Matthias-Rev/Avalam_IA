@@ -93,13 +93,13 @@ Donc, plus il y aura de simulations plus l'algorithmes représentera une réalit
 - socket
 - webbroser
 
-#### lien intéressant pour la compréhension
+### lien intéressant pour la compréhension
 
 - https://www.youtube.com/watch?v=UXW2yZndl7U
 - https://www.youtube.com/watch?v=Fbs4lnGLS8M&t=638s
 - https://web.stanford.edu/~surag/posts/alphazero.html
 
-#### Si tu veux continuer sur mes pas jeune padawan :godmode:
+### Si tu veux continuer sur mes pas jeune padawan :godmode:
 
 Le plus intéressant serait de lui rajouter un soutien avec un reseau de neurone ,pour l'algorithme en tant que telle une optimisation serait bienvenue.
 
