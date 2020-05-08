@@ -5,6 +5,7 @@ Projet réalisé par Matthias Reveillard (18122) et Mateo Yerles (18714) dans le
 # Présentation du Projet
 
 Dans le cadre du projet, il nous a été demandé de programmer une intelligence artificiel avec un algorithme au choix sur base d'un jeu de société appellé "Avalam".
+
 Pour la petite histoire, Avalam fut crée par PHilipe Deweys en 1995.
 Son créateur est d'ailleurs Waterlootois et son jeu a été primé par de nombreux prix autour du globe ce qui en fait le jeu belge le plus primé à ce jour.
 L'objectif étant s'affronter entre éleve sur le serveur créé par le professeur Mr Lurkin.
@@ -51,9 +52,26 @@ On descend ainsi jusqu'à un noeud qui n'a aucun fils
 
 #### L'expansion
 
-Si un noeud ne posséde aucun fils, on va alors 'l'expand' donc lui rajouter autant de fils qu'il y a de possibilité de jeu.
+Si un noeud ne posséde aucun fils et qu'il a été déjà exploré, on va alors 'l'expand' donc lui rajouter autant de fils qu'il y a de possibilité de jeu.
+
 Par exemple,
 
-blabla
+![TicTacToe](https://user-images.githubusercontent.com/60757246/81435139-a12d9700-9167-11ea-844f-e33533caf105.png)
 
 Dans ce cas-ci, les croix ont encore 5 possibilités de jeux donc ce noeud aura 5 fils.
+
+#### La Simulation
+
+Si dans la descente, il trouve un noeud ne possédant aucun fils **et n'a pas été encore exploré.**
+Il va à partir de la valeur du noeud donc d'un **move** dans l'exemple d'un jeu, effectué des simulations avec des déplacements aléatoires
+jusqu'a ce que il arrive à un état de victoire pour un des deux camps.
+Exemple du TicTacToe, jusqu'a ce que il y ai une ligne de 3 croix ou  3 cercles indiquant une victoire ou alors s'arrête lors d'une égalité.
+
+#### Backpropagation
+
+À la suite de la simulation, on se retouve avec un résultat vainqueur, perdant ou égalité. Le programme va alors faire remonter cette info jusque au noeud de départ et lui ajouter le résultat dans ses paramètres ainsi que lui rajouter +1 dans son paramètre d'exploration
+```python
+self.__exploration+=1
+self.__win+=resultat
+```
+
