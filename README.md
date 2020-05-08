@@ -8,7 +8,7 @@ Dans le cadre du projet, il nous a été demandé de programmer une intelligence
 
 Pour la petite histoire, Avalam fut crée par PHilipe Deweys en 1995.
 Son créateur est d'ailleurs Waterlootois et son jeu a été primé par de nombreux prix autour du globe ce qui en fait le jeu belge le plus primé à ce jour.
-L'objectif étant s'affronter entre éleve sur le serveur créé par le professeur Mr Lurkin.
+L'objectif étant de s'affronter entre éleve sur le serveur créé par le professeur Mr Lurkin.
 
 # Le Programme
 Afin de démarré le serveur principal qui recueillera les matches, vous aurez besoin des fichiers du serveur sur le profil suivant:
@@ -30,6 +30,7 @@ C'est à dire "Alpha(Go)Zero"
 ## Mont Carlo Tree Search
 AlphaZero utilise comme algo principale le Mont Carlo Tree Search (MCTS) et en complément un reseau de neuronnes.
 Dans le cadre du projet nous nous sommes arreté au MCTS qui est déja puissant pour la tâche demandée.
+
 ### Mais comment fonctionne-t-il ?
 ![MCTS](https://user-images.githubusercontent.com/60757246/81428082-07142180-915c-11ea-8349-7aaea1bd9a57.png)
 
@@ -65,13 +66,12 @@ Dans ce cas-ci, les croix ont encore 5 possibilités de jeux donc ce noeud aura 
 Si dans la descente, il trouve un noeud ne possédant aucun fils **et n'a pas été encore exploré.**
 Il va à partir de la valeur du noeud donc d'un **move** dans l'exemple d'un jeu, effectué des simulations avec des déplacements aléatoires
 jusqu'a ce que il arrive à un état de victoire pour un des deux camps.
-Exemple du TicTacToe, jusqu'a ce que il y ai une ligne de 3 croix ou  3 cercles indiquant une victoire ou alors s'arrête lors d'une égalité.
+Exemple du TicTacToe, jusqu'a ce que il y ai une ligne de 3 croix ou 3 cercles indiquant une victoire ou alors s'arrête lors d'une égalité.
 
 #### Backpropagation
 
-À la suite de la simulation, on se retouve avec un résultat vainqueur, perdant ou égalité. Le programme va alors faire remonter cette info jusque au noeud de départ et lui ajouter le résultat dans ses paramètres ainsi que lui rajouter +1 dans son paramètre d'exploration
+À la suite de la simulation, on se retouve avec un résultat vainqueur, perdant ou égalité. Le programme va alors faire remonter cette info jusque au noeud de départ et lui ajoutant le résultat dans ses paramètres ainsi que lui rajouter +1 dans son paramètre d'exploration et ce aussi pour le noeud racine.
 ```python
 self.__exploration+=1
 self.__win+=resultat
 ```
-
