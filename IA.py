@@ -10,8 +10,7 @@ import copy
 from random import choice
 import math
 from tree_search import *
-#https://www.google.com/search?client=firefox-b-d&q=send+json+socket+python#kpvalbx=_xDiPXprYO463kwXtyLKAAw26
-#ip= 127.0.0.1
+
 
 liste_possible=[]
 N=0
@@ -20,14 +19,14 @@ Moi=None
 
 def Connect_Server():
     global s
-    adresse = ("127.0.0.1", 8081) #Changer le port si tu veux
+    adresse = ("127.0.0.1", 8081)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(adresse)
     print('Correctement connecté')
 
 def send_ping():
     Connect_Server()
-    s.connect(('127.0.0.1', 3001))  #Serveur du prof
+    s.connect(('127.0.0.1', 3001))
     with open('ping.json') as file:
         msg=json.loads(file.read())
     ping_msg=json.dumps(msg).encode('utf8')
@@ -79,32 +78,26 @@ class Server(Tree):
             return ''
         
         body = cherrypy.request.json
-        #print(body)
         if body !=None:
             board=body['game']
             print(board)
             for x in body['players']:
                 if x == body['you']:
                     state=body['players'].index(x)
-                    #print(state)
                     if state == 0:
                         me=True
                     else:
                         me=False
-            for _ in range(100):
+            for _ in range(150):
                 board_modified=copy.deepcopy(board)
                 conserve._MCTS(board_modified, me)
                 board_modified=[]
-                #print(conserve)
             choix=conserve._select_best_child()
-            #print('Le {} avec un ucts de {}'.format(choix[0], choix[1]))
             del conserve.children[choix[2]+1:len(conserve.children)]
             del conserve.children[0:choix[2]]
             conserve=conserve.children[0]
-            #print(conserve)
             move=list(choix[0])
-            #print(move)
-            data={"move": {"from": [int(move[5]), int(move[7])],"to": [int(move[12]), int(move[14])]},"message": "I'm Smart"}
+            data={"move": {"from": [int(move[5]), int(move[7])],"to": [int(move[12]), int(move[14])]},"message": "Execute Order 66"}
             return data
 
 

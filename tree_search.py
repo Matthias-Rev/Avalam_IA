@@ -7,13 +7,15 @@ liste_possible=[]
 N=0
 Path=[]
 Moi=None
-#Inverser le premier coup
+
+#permet de savoir quelle pion on est
 def tour(num):
     if num == False:
         return 1
     else:
         return 0
 
+#determine si qqun sait encore jouer
 def winner(board, turn, number=0):
     if len(verification(board, turn))==0:
         if number==1:
@@ -23,6 +25,7 @@ def winner(board, turn, number=0):
     else:
         return False
 
+#Renvoie si c'est une victoire ou une défaite, une égalité
 def win(board):
     win_0=0
     win_1=0
@@ -44,9 +47,9 @@ def win(board):
         else:
             return 1
     else:
-        #Pour l'instant ça reste en juste-milieu
         return 0
 
+#vérifie toute les cases possibles à jouer
 def verification (board, turn):
     turns=tour(turn)
     number=0
@@ -59,6 +62,13 @@ def verification (board, turn):
             number+=1
     return cas_possible
 
+'''
+comment  ça marche:  a   b    c
+                     h target d
+                     e   f    g
+garde ça dans une liste [a, b, c]
+réponse représente tout les coups possibles d'une case
+'''
 def possibility (board, case):
     cases=[]
     z=0
@@ -89,6 +99,7 @@ def possibility (board, case):
         z+=1
     return mvt_possible
 
+#renvoie une manière plus facile de lire ce qu'il se passe
 def mvt_string(case, destination):
     possible_letter={'a':[case-10],'b':[case-9],'c':[case-8],'d':[case+1],'e':[case+10],'f':[case+9],'g':[case+8],'h':[case-1]}
     for x in possible_letter:
@@ -104,6 +115,7 @@ def full_random(board, turn):
             liste_possible.append(next_value)
     return liste_possible
 
+#modifie le board actuel avec le move choisie
 def make_move(board,ligne, colomn, ligne_dest, colomn_dest):
     copy_case=copy.deepcopy(board[ligne][colomn])
     board[ligne][colomn]=[]
@@ -142,6 +154,7 @@ class Tree:
     def __getitem__(self, index):
         return self.__children[index]
     
+    #l'équation d'exploration dans la sélection
     @property
     def _utc(self):
         global N
@@ -172,22 +185,19 @@ class Tree:
     
     def _delete(self, value, level=0):
         for child in self.children:
-            '''if child.size>1:
-                return child._delete(value)'''
             if child.value ==value:
                 del self.children[0]
                 return
     
-    #res = 0 1 0.5
+    #la fonction principale
     def _MCTS(self, board, turn):
         global N
-        if len(self.children) == 0:#feuille
+        if len(self.children) == 0:# si c'est une feuille ou un fils sans fils
             if self.__exploration==0:#vierge d'exploration
-                result= self._rollout(board, turn) #simulation renvoie un resultat #MAJ les résultats ,self.win += res#Simulation+=1
+                result= self._rollout(board, turn) #autre nom pour la phase simulation
                 self.__exploration+=1
                 self.__win+=result
                 self.__children
-                #print(self)
                 return result
             else:
                 self._expand(board, not turn)
@@ -196,8 +206,7 @@ class Tree:
         self.__exploration+=1
         self.__win+=res
         N+=1
-        #MAJ du resultat dans le noeud courant (win+=res)
-        #Simulation+=1
+        #MAJ du resultat dans le noeud courant
         return res
     
     def _rollout(self, board, turn):#simulation renvoie un resultat
@@ -213,14 +222,11 @@ class Tree:
         new_case=choice(full_random(board, turn))
         next_child=Tree(str(new_case))
         liste_possible=[]
-        #Path.append(str(new_case))
         return next_child._rollout(new_board, not turn)
     
     def _expand(self, board, turn):
-        #liste des coups et ajouter chaque coup comme un noeud et peut etre l'etat du board
         #Liste des coups possibles
-        #Ajouter chaque coup comme noeud
-        #l'etat du board qui en découle
+        #Ajoute chaque coup comme noeud
         all_case_possibility=verification(board, turn)
         for x in all_case_possibility:
             all_deplacement=possibility(board, x)
@@ -244,6 +250,7 @@ class Tree:
         board=make_move(board, int(move_split[5]), int(move_split[7]), int(move_split[12]), int(move_split[14]))
         return board
 
+    #fonction utiliser à la fin pour renvoyer le fils le plus prometteur
     def _select_best_child (self, maximum=0):
         for child in self.children:
             if child.__exploration==0:
@@ -255,32 +262,3 @@ class Tree:
                     level=self.children.index(child)
                     
         return best_child, maximum ,level
-
-#R < F100 < F5(0.5/1) < 
-'''actual_game=[
-		[ [],  [],  [], [0], [1],  [],  [],  [],  []],
-		[ [],  [],  [], [1], [0], [1], [0], [1],  []],
-		[ [],  [], [1], [0], [1], [0], [1], [0], [1]],
-		[ [],  [], [0], [1], [0], [1], [0], [1], [0]],
-		[ [], [0], [1], [0],  [], [0], [1], [0],  []],
-		[[0], [1], [0], [1], [0], [1], [0],  [],  []],
-		[[1], [0], [1], [0], [1], [0], [1],  [],  []],
-		[ [], [1], [0], [1], [0], [1],  [],  [],  []],
-		[ [],  [],  [],  [], [1], [0],  [],  [],  []]
-	]
-t_all=Tree('move 0,0 to 0,0')
-soustract=0
-while soustract < 8:
-    begin=time.time()
-    for _ in range(100):
-        board_modified=copy.deepcopy(actual_game)
-        t_all._MCTS(board_modified, Moi)
-        board_modified=[]
-    choix=t_all._select_best_child()
-    print('Le {} avec un ucts de {}'.format(choix[0], choix[1]))
-    del t_all.children[choix[2]+1:len(t_all.children)]
-    del t_all.children[0:choix[2]]
-    t_all=t_all.children[0]
-    endd=time.time()
-    soustract=endd-begin
-    print(t_all,'\n', f"{endd-begin}s")'''
