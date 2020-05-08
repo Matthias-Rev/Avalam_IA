@@ -79,5 +79,6 @@ self.__win+=resultat
 ### C'est bien mais on fait quoi après ?
 
 En fonction du nombre de simulation voulue ou bien dans notre cas d'une contrainte de temps, l'algorithme va renvoyé le meilleur fils de la racine en fonction de l'équation mentionner plus haut.
+
 Ce fils est censé représenter le meilleur coup possible, en effet le MCTS se base sur des statistiques.
 Donc, plus il y aura de simulations plus l'algorithmes représentera une réalité dépassant la notion de 'random'.
