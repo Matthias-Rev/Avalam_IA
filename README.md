@@ -40,4 +40,16 @@ C'est un algorithme qui fonctionne sur base d'un Arbre de possibilité, les noeu
 Le programme descend de la racine à ses fils, et de ses fils à ses "petit-fils", dans un sens bien précis.
 En effet, le prochain fils à être visité est choisie parmis les autres suivants une équation, le noeud possédant la valeur la plus élevé est sélectionné.
 
+![image-uct-formula](https://user-images.githubusercontent.com/60757246/81433802-6f1b3580-9165-11ea-8235-d8a1fbfce5a8.png)
 
+- X représente la division du nombre de victoire sur le nombre d'exploration du noeud
+- Cp étant un coefficient d'exploration
+- N le nombre d'exploration
+- Nj le nombre d'exploration du noeud
+
+On descend ainsi jusqu'à un noeud qui n'a aucun fils
+
+#### L'expansion
+
+Si un noeud ne posséde aucun fils, on va alors 'l'expand' donc lui rajouter autant de fils qu'il y a de possibilité de jeu.
+Par exemple,
